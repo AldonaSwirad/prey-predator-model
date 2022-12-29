@@ -87,6 +87,7 @@ def update(val):
     b = b_slider.val
     c = c_slider.val
     d = d_slider.val
+    ax.clear()
     ax.plot(f(a,b,c_,d))
  
 
