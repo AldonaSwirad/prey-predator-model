@@ -37,10 +37,10 @@ def f(a, b, c_, d):
 plt.plot(f(a,b,c_,d))
 
 # ax of sliders
-ax_a = plt.axes([0.25, 0.2, 0.65, 0.03])
-ax_b = plt.axes([0.25, 0.15, 0.65, 0.03])
-ax_c = plt.axes([0.25, 0.1, 0.65, 0.03])
-ax_d = plt.axes([0.25, 0.05, 0.65, 0.03])
+ax_a = plt.axes([0.15, 0.2, 0.65, 0.03])
+ax_b = plt.axes([0.15, 0.15, 0.65, 0.03])
+ax_c = plt.axes([0.15, 0.1, 0.65, 0.03])
+ax_d = plt.axes([0.15, 0.05, 0.65, 0.03])
 
 # Sliders
 a_slider = Slider(
@@ -95,6 +95,21 @@ a_slider.on_changed(update)
 b_slider.on_changed(update)
 c_slider.on_changed(update)
 d_slider.on_changed(update)
+
+# Create axes for reset button and create button
+resetax = plt.axes([0.88, 0.025, 0.1, 0.04])
+button = Button(resetax, 'Reset', color='gold', hovercolor='skyblue')
+
+def resetSlider(event):
+    a_slider.reset()
+    b_slider.reset()
+    c_slider.reset()
+    d_slider.reset()
+    ax.clear()
+    ax.plot(f(a,b,c_,d))
+ 
+# Call resetSlider function when clicked on reset button
+button.on_clicked(resetSlider)
 
 
 plt.show()
