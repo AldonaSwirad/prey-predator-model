@@ -8,7 +8,7 @@ from matplotlib.widgets import Slider, Button
 # timestep determines the accuracy of the euler method of integration
 timestep = 0.0001
 # amplitude of noise term
-amp = 0.00
+# amp = 0.00
 # the time at which the simulation ends
 end_time = 50
 
@@ -23,14 +23,14 @@ y = []
 x.append(100)
 y.append(20)
 
-# birth rate of rabbits
-a = 1
-# death rate of rabbits due to predation
-b = 0.1
-# natural death rate of foxes
-c = 0.5
-# factor that describes how many eaten rabbits give birth to a new fox
-d = 0.02
+# # birth rate of rabbits
+# a = 1
+# # death rate of rabbits due to predation
+# b = 0.1
+# # natural death rate of foxes
+# c = 0.5
+# # factor that describes how many eaten rabbits give birth to a new fox
+# d = 0.02
 
 def eq(a = 1, b = 0.1, c = 0.5, d = 0.02 ):
     for index in range(1,len(t)):
@@ -55,13 +55,15 @@ def eq(a = 1, b = 0.1, c = 0.5, d = 0.02 ):
     return x, y
 
 
-eq(a,b,c,d)
+eq(1,0.1,0.5,0.02)
 
     # Create the figure and the line that we will manipulate
 fig = plt.figure()
-ax = plt.subplots()
+ax = fig.subplots()
 line_mooses = plt.plot(t, x)
+line_mooses = plt.plot(t, x_new, 'g')
 line_wolfes = plt.plot(t, y)
+line_wolfes = plt.plot(t_new, y_new, 'g')
 
 # visualization of deterministic populations against time
 # line_mooses
@@ -70,8 +72,9 @@ plt.xlabel('Time')
 plt.ylabel('Population Size')
 plt.legend(('Mooses', 'Wolfes'))
 plt.title('Deterministic Lotka-Volterra')
+plt.subplots_adjust(bottom = 0.25)
 
-ax_a = plt.axes([0.2, 0, 0.65, 0.03], facecolor='red')
+ax_a = plt.axes([0.2, 0.10, 0.65, 0.03], facecolor='red')
 slider_a = Slider(
     ax = ax_a,
     label = 'a',
@@ -82,9 +85,11 @@ slider_a = Slider(
 
 def update(val):
     current_v = slider_a.val
-    line_mooses.set_ydata(eq(a.val, b, c, d))
+    eq = eq(a = current_v, b = 0.1, c = 0.5, d = 0.02 )
+    line_mooses.set_ydata(eq(x_new))
+    # line_wolfes.set_ydata(eq(a.val, b.val, c.val, d.val))
     fig.canvas.draw()
 
 slider_a.on_changed(update)
 
-plt.show()
+# plt.show()
