@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.widgets import Slider, Button
-#from mpl_interactions import ipyplot as iplt
+
+# from mpl_interactions import ipyplot as iplt
 
 from scipy import integrate
 
@@ -22,9 +23,9 @@ b = 0.5
 c_ = 0.5
 d = 0.5
 
-plt.subplots_adjust(bottom=0.35) 
+plt.subplots_adjust(bottom=0.35)
 # lotka-volttera differential equestion
-def f(a, b, c_, d):   
+def f(a, b, c_, d):
     def dX_dt(X, t=0):
         rabbits, foxes = X
         dRabbit_dt = a * rabbits - b * foxes * rabbits
@@ -35,12 +36,13 @@ def f(a, b, c_, d):
     return X  # expects shape (N, 2)
 
 
-# 
+#
 
-model_calc_result = f(a,b,c_,d)
-ax[0].plot(model_calc_result) # predator and prey population over time
-ax[1].plot(model_calc_result[:,0], model_calc_result[:,1]) # phase portrait of the equation
-
+model_calc_result = f(a, b, c_, d)
+ax[0].plot(model_calc_result)  # predator and prey population over time
+ax[1].plot(
+    model_calc_result[:, 0], model_calc_result[:, 1]
+)  # phase portrait of the equation
 
 
 # ax of sliders
@@ -50,56 +52,30 @@ ax_c = plt.axes([0.25, 0.1, 0.65, 0.03])
 ax_d = plt.axes([0.25, 0.05, 0.65, 0.03])
 
 # Sliders
-a_slider = Slider(
-    ax=ax_a,
-    label = 'a',
-    valmin=0,
-    valmax=3,
-    valinit=1
-)
+a_slider = Slider(ax=ax_a, label="a", valmin=0, valmax=3, valinit=1)
 
-b_slider = Slider(
-    ax=ax_b,
-    label = 'b',
-    valmin=0,
-    valmax=3,
-    valinit=0.5
+b_slider = Slider(ax=ax_b, label="b", valmin=0, valmax=3, valinit=0.5)
 
-)
-
-c_slider = Slider(
-    ax=ax_c,
-    label = 'c',
-    valmin=0,
-    valmax=3,
-    valinit=0.5
-
-)
-d_slider = Slider(
-    ax=ax_d,
-    label = 'd',
-    valmin=0,
-    valmax=3,
-    valinit=0.5
-
-)
+c_slider = Slider(ax=ax_c, label="c", valmin=0, valmax=3, valinit=0.5)
+d_slider = Slider(ax=ax_d, label="d", valmin=0, valmax=3, valinit=0.5)
 
 # a_slider.set_val(a)
 # b_slider.set_val(b)
 # c_slider.set_val(c_)
 # d_slider.set_val(d)
 
+
 def update(val):
     a = a_slider.val
     b = b_slider.val
     c_ = c_slider.val
     d = d_slider.val
-    model_calc_result = f(a,b,c_,d)
+    model_calc_result = f(a, b, c_, d)
     ax[0].clear()
     ax[0].plot(model_calc_result)
     ax[1].clear()
-    ax[1].plot(model_calc_result[:,0], model_calc_result[:,1])
- 
+    ax[1].plot(model_calc_result[:, 0], model_calc_result[:, 1])
+
 
 a_slider.on_changed(update)
 b_slider.on_changed(update)
