@@ -15,7 +15,7 @@ X0 = np.array([rabbit, fox])  # initials conditions: 10 rabbits and 5 foxes
 # use `c_` instead of `c` because `c` is an argument to plt.scatter
 
 # Create subplots
-fig, ax = plt.subplots(2)
+fig, ax = plt.subplots(1, 2)
 
 # initials conditions
 a = 1.5
