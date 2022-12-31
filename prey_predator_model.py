@@ -13,8 +13,8 @@ X0 = np.array([rabbit, fox])  # initials conditions: 10 rabbits and 5 foxes
 
 # use `c_` instead of `c` because `c` is an argument to plt.scatter
 
-# Create a subplot
-fig, ax = plt.subplots()
+# Create subplots
+fig, ax = plt.subplots(2)
 
 # initials conditions
 a = 1.5
@@ -35,8 +35,13 @@ def f(a, b, c_, d):
     return X  # expects shape (N, 2)
 
 
+# 
 
-plt.plot(f(a,b,c_,d))
+model_calc_result = f(a,b,c_,d)
+ax[0].plot(model_calc_result) # predator and prey population over time
+ax[1].plot(model_calc_result[:,0], model_calc_result[:,1]) # phase portrait of the equation
+
+
 
 # ax of sliders
 ax_a = plt.axes([0.25, 0.2, 0.65, 0.03])
@@ -89,8 +94,11 @@ def update(val):
     b = b_slider.val
     c_ = c_slider.val
     d = d_slider.val
-    ax.clear()
-    ax.plot(f(a,b,c_,d))
+    model_calc_result = f(a,b,c_,d)
+    ax[0].clear()
+    ax[0].plot(model_calc_result)
+    ax[1].clear()
+    ax[1].plot(model_calc_result[:,0], model_calc_result[:,1])
  
 
 a_slider.on_changed(update)
