@@ -34,6 +34,8 @@ def f(a, b, c_, d):
     X, legenda = integrate.odeint(dX_dt, X0, t, full_output=True)
     return X  # expects shape (N, 2)
 
+
+
 plt.plot(f(a,b,c_,d))
 
 # ax of sliders
@@ -85,8 +87,9 @@ d_slider = Slider(
 def update(val):
     a = a_slider.val
     b = b_slider.val
-    c = c_slider.val
+    c_ = c_slider.val
     d = d_slider.val
+    ax.clear()
     ax.plot(f(a,b,c_,d))
  
 
