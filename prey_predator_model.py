@@ -36,8 +36,6 @@ def f(a, b, c_, d):
     return X  # expects shape (N, 2)
 
 
-
-
 model_calc_result = f(a, b, c_, d)
 ax[0].plot(model_calc_result)  # predator and prey population over time
 ax[1].plot(
@@ -86,7 +84,8 @@ d_slider.on_changed(update)
 
 # Create axes for reset button and create button
 resetax = plt.axes([0.88, 0.025, 0.1, 0.04])
-button = Button(resetax, 'Reset', color='gold', hovercolor='skyblue')
+button = Button(resetax, "Reset", color="gold", hovercolor="skyblue")
+
 
 def resetSlider(event):
     a_slider.reset()
@@ -94,11 +93,10 @@ def resetSlider(event):
     c_slider.reset()
     d_slider.reset()
     update(resetax)
- 
+
+
 # Call resetSlider function when clicked on reset button
 button.on_clicked(resetSlider)
-
-
 
 
 plt.show()
