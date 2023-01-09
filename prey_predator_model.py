@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.widgets import Slider, Button
+import random
 
 # from mpl_interactions import ipyplot as iplt
 
@@ -28,8 +29,8 @@ plt.subplots_adjust(bottom=0.35)
 def f(a, b, c_, d):
     def dX_dt(X, t=0):
         rabbits, foxes = X
-        dRabbit_dt = a * rabbits - b * foxes * rabbits
-        dFox_dt = -c_ * foxes + d * b * rabbits * foxes
+        dRabbit_dt = (a * rabbits - b * foxes * rabbits)
+        dFox_dt = (-c_ * foxes + d * b * rabbits * foxes)
         return [dRabbit_dt, dFox_dt]
 
     X, legenda = integrate.odeint(dX_dt, X0, t, full_output=True)
